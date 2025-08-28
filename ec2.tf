@@ -16,16 +16,16 @@ resource "aws_instance" "server" {
 
 //ebs volume creation
 resource "aws_ebs_volume" "ebs" {
-  size = 20
+  size              = 20
   availability_zone = aws_instance.server.availability_zone
   tags = {
     Name = "Extra-volume"
-  }  
+  }
 }
 
 //attaching extra volume to ec2 instance
 resource "aws_volume_attachment" "att" {
   instance_id = aws_instance.server.id
-  volume_id = aws_ebs_volume.ebs.id
-  device_name = "/dev/sdb"  
+  volume_id   = aws_ebs_volume.ebs.id
+  device_name = "/dev/sdb"
 }
